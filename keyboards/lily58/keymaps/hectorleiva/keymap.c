@@ -119,7 +119,9 @@ const char *read_keylogs(void);
 
 // const char *read_mode_icon(bool swap);
 // const char *read_host_led_state(void);
-// void set_timelog(void);
+
+// timelogging
+void set_timelog(void);
 // const char *read_timelog(void);
 
 bool oled_task_user(void) {
@@ -143,7 +145,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 #ifdef OLED_ENABLE
     set_keylog(keycode, record);
 #endif
-    // set_timelog();
+    set_timelog();
   }
   return true;
 }
