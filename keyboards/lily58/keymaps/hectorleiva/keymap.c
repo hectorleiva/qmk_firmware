@@ -122,7 +122,7 @@ const char *read_keylogs(void);
 
 // timelogging
 void set_timelog(void);
-// const char *read_timelog(void);
+const char *read_timelog(void);
 
 bool oled_task_user(void) {
   if (is_keyboard_master()) {
@@ -132,7 +132,7 @@ bool oled_task_user(void) {
     oled_write_ln(read_keylogs(), false);
     //oled_write_ln(read_mode_icon(keymap_config.swap_lalt_lgui), false);
     //oled_write_ln(read_host_led_state(), false);
-    //oled_write_ln(read_timelog(), false);
+    oled_write_ln(read_timelog(), false);
   } else {
     oled_write(read_logo(), false);
   }
@@ -142,10 +142,10 @@ bool oled_task_user(void) {
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   if (record->event.pressed) {
-#ifdef OLED_ENABLE
-    set_keylog(keycode, record);
-#endif
-    set_timelog();
+    #ifdef OLED_ENABLE
+        set_keylog(keycode, record);
+        set_timelog();
+    #endif
   }
   return true;
 }
